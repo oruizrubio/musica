@@ -38,20 +38,22 @@ public class UsuarioServiceJpa implements UsuarioService {
 
 	@Override
 	public void validarUsuario(Usuario pUsuario) {
-		System.out.println("UsuarioBean.validarUsuario");
+		System.out.println("UsuarioServiceJpa.validarUsuario");
 		String nombre = pUsuario.getUsuario();
 		String clave = pUsuario.getPassword();
-		System.out.println("UsuarioBean.validarUsuario "+ nombre + " " + clave);
-		JPAJinqStream<Usuario> query = getStream();
-		
-		if (nombre != null) {
-			query = query.where(usuario -> usuario.getUsuario().toUpperCase().contains(nombre.toUpperCase()) 
-					&& usuario.getPassword().toUpperCase().contains(clave.toUpperCase()) );
-		}
-		System.out.println("UsuarioBean.validarUsuario "+query.count());
-		if (query.count() == 1) {
-			HttpSession sesion = SessionUtils.getSession();
-			sesion.setAttribute("username", nombre);
+		System.out.println("UsuarioServiceJpa.validarUsuario "+ nombre + " " + clave);
+		if (nombre != null && clave != null) {
+			JPAJinqStream<Usuario> query = getStream();
+			
+			if (nombre != null) {
+				query = query.where(usuario -> usuario.getUsuario().toUpperCase().contains(nombre.toUpperCase()) 
+						&& usuario.getPassword().toUpperCase().contains(clave.toUpperCase()) );
+			}
+			System.out.println("UsuarioServiceJpa.validarUsuario "+query.count());
+			if (query.count() == 1) {
+				HttpSession sesion = SessionUtils.getSession();
+				sesion.setAttribute("username", nombre);
+			}
 		}
 	}
 

@@ -2,26 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
 
 <h:head></h:head> 
 <body> 
 <h:form>
-Esta es la página de login <h:commandLink action="principal" value="Login"></h:commandLink>
 	<h:form>
-		<h3>Inicio de sesión</h3>
-		<h:outputText value="Username" />
-		<h:inputText id="username" value="#{usuarioBean.usuario.usuario}"></h:inputText>
-		<h:message for="username"></h:message>
-		<br></br><br></br>
+		<p:outputLabel value="Inicio de sesión"></p:outputLabel>
+		<h:panelGrid columns="2">
+				<p:outputLabel value="Nombre:"/>
+				<p:inputText label="Usuario" value="#{usuarioBean.usuario.usuario}" />
+		</h:panelGrid>		
+		<h:panelGrid columns="3">
+				<p:outputLabel value="Password:"/>
+				<p:password value="#{usuarioBean.usuario.password}"/>
+		</h:panelGrid>				
 		
-		<h:outputText value="Password" />
-		<h:inputSecret id="password" value="#{usuarioBean.usuario.password}"></h:inputSecret>
-		<h:message for="password"></h:message>
-		<br></br><br></br>
-		
-		<h:commandButton action="#{usuarioBean.validarUsuario}"
-			value="Login"></h:commandButton>
+		<p:commandButton value="Login" action="#{usuarioBean.validarUsuario()}"></p:commandButton>
 	</h:form>
 </h:form> 
 </body> 

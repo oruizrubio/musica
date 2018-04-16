@@ -2,6 +2,9 @@ package es.oruiz.musica.Usuario.boundary;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -15,25 +18,13 @@ import es.oruiz.musica.util.SessionUtils;
 import lombok.Getter;
 import lombok.Setter;
 
-//@Named("usuarioBean")
-@ManagedBean
-@ViewScoped
+@Named("usuarioBean")
+@RequestScoped
 public class UsuarioBean implements Serializable{
-	//@Getter
-	//@Setter
+	@Getter
+	@Setter
 	private Usuario usuario;
 	
-	public Usuario getUsuario() {
-		if (usuario == null) {
-			usuario = new Usuario();
-		}
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 	@Inject 
 	@JpaService
 	private UsuarioService usuarioService;	
@@ -42,8 +33,13 @@ public class UsuarioBean implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
+	@PostConstruct
+	private void init() {
+		usuario = new Usuario();
+	}
+	
 	public String validarUsuario() {
-		System.out.println("UsuarioBean.validarUsuario");
+		System.out.println("UsuarioBean.validarUsuario "+ usuario.getUsuario());
 		usuarioService.validarUsuario(usuario);
 		
 		return "principal";
