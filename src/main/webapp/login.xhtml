@@ -9,17 +9,17 @@
 <body> 
 <h:form>
 	<h:form>
-		<p:outputLabel value="Inicio de sesión"></p:outputLabel>
-		<h:panelGrid columns="2">
-				<p:outputLabel value="Nombre:"/>
-				<p:inputText label="Usuario" value="#{usuarioBean.usuario.usuario}" />
-		</h:panelGrid>		
-		<h:panelGrid columns="3">
-				<p:outputLabel value="Password:"/>
-				<p:password value="#{usuarioBean.usuario.password}"/>
-		</h:panelGrid>				
-		
-		<p:commandButton value="Login" action="#{usuarioBean.validarUsuario()}"></p:commandButton>
+	<div style="padding-top:100px;">
+		<p:panel id="panel" header="Inicio de sesión" style="margin-bottom:10px;width:300px;margin:0 auto">
+        <p:messages id="messages" />		
+		<h:panelGrid columns="1" cellpadding="5">
+				<p:inputText id="usuario" placeholder="Usuario" label="Usuario" value="#{usuarioBean.usuario.usuario}" />
+				
+				<p:password id="password" placeholder="Password" value="#{usuarioBean.usuario.password}"/>
+				<p:commandButton value="Login" action="#{usuarioBean.validarUsuario()}" styleClass="ui-priority-primary" />
+		</h:panelGrid>
+		</p:panel>
+	</div>
 	</h:form>
 </h:form> 
 </body> 
